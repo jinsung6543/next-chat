@@ -2,49 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import queryString from 'query-string';
 import io from 'socket.io-client';
 import Peer from 'simple-peer';
-import styled from 'styled-components';
 
 import './Chat.css';
 import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
 import Messages from '../Messages/Messages';
-import TextContainer from '../TextContainer/TextContainer';
 import Header from '../Header/Header';
 import ChatPageHeader from '../ChatPageHeader/ChatPageHeader';
 import RoomInfo from '../RoomInfo/RoomInfo';
-
-// let socket;
-
-const Container = styled.div`
-  padding: 20px;
-  display: flex;
-  height: 100vh;
-  width: 90%;
-  margin: auto;
-  flex-wrap: wrap;
-`;
-
-const StyledVideo = styled.video`
-  height: 40%;
-  width: 50%;
-`;
-
-const videoConstraints = {
-  height: window.innerHeight / 2,
-  width: window.innerWidth / 2,
-};
-
-const Video = (props) => {
-  const ref = useRef();
-
-  useEffect(() => {
-    props.peer.on('stream', (stream) => {
-      ref.current.srcObject = stream;
-    });
-  }, [props.peer]);
-
-  return <StyledVideo playsInline autoPlay ref={ref} />;
-};
+import MyVideo from '../MyVideo/MyVideo';
+import OtherVideo from '../OtherVideo/OtherVideo';
 
 const Chat = ({ location }) => {
   const [name, setName] = useState('');
@@ -70,7 +37,7 @@ const Chat = ({ location }) => {
     setRoom(room);
 
     navigator.mediaDevices
-      .getUserMedia({ video: videoConstraints, audio: true })
+      .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         userVideo.current.srcObject = stream;
         socketRef.current.emit('join', { name, room }, () => {});
@@ -101,7 +68,7 @@ const Chat = ({ location }) => {
             peer,
           });
 
-          setPeers((users) => [...peersRef.current]);
+          setPeers([...peersRef.current]);
         });
 
         socketRef.current.on('receivedSignal', (payload) => {
@@ -141,7 +108,6 @@ const Chat = ({ location }) => {
   };
 
   function createPeer(userToSignal, callerID, stream) {
-    console.log(userToSignal, callerID, stream);
     const peer = new Peer({
       initiator: true,
       trickle: false,
@@ -149,7 +115,12 @@ const Chat = ({ location }) => {
     });
 
     peer.on('signal', (signal) => {
-      socketRef.current.emit('sendSignal', { userToSignal, callerID, signal });
+      console.log('signal', name);
+      socketRef.current.emit('sendSignal', {
+        userToSignal,
+        callerID,
+        signal,
+      });
     });
 
     return peer;
@@ -183,13 +154,15 @@ const Chat = ({ location }) => {
           messageAlert={messageAlert}
           setMessageAlert={setMessageAlert}
         />
-        <Container>
-          <h5>{name}</h5>
-          <StyledVideo muted ref={userVideo} autoPlay playsInline />
+
+        {/* <Container> */}
+        <div>
+          <MyVideo videoRef={userVideo} />
           {peers.map((peer) => {
-            return <Video key={peer.peerID} peer={peer.peer} />;
+            return <OtherVideo key={peer.peerID} peer={peer.peer} />;
           })}
-        </Container>
+        </div>
+        {/* </Container> */}
         {isMessenger && (
           <div className="container">
             <InfoBar room={room} setIsMessenger={setIsMessenger} />
