@@ -9,6 +9,9 @@ import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
 import Messages from '../Messages/Messages';
 import TextContainer from '../TextContainer/TextContainer';
+import Header from '../Header/Header';
+import ChatPageHeader from '../ChatPageHeader/ChatPageHeader';
+import RoomInfo from '../RoomInfo/RoomInfo';
 
 // let socket;
 
@@ -49,6 +52,9 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [isMessenger, setIsMessenger] = useState(false);
+  const [isUsers, setIsUsers] = useState(false);
+  const [messageAlert, setMessageAlert] = useState({});
   const [peers, setPeers] = useState([]);
   const socketRef = useRef();
   const userVideo = useRef();
@@ -166,25 +172,42 @@ const Chat = ({ location }) => {
   }
 
   return (
-    <div className="outerContainer">
-      <Container>
-        <h5>{name}</h5>
-        <StyledVideo muted ref={userVideo} autoPlay playsInline />
-        {peers.map((peer) => {
-          return <Video key={peer.peerID} peer={peer.peer} />;
-        })}
-      </Container>
-      <div className="container">
-        <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
-        <Input
-          message={message}
-          setMessage={setMessage}
-          sendMessage={sendMessage}
+    <>
+      <Header />
+      <div className="outerContainer">
+        <ChatPageHeader
+          isMessenger={isMessenger}
+          setIsMessenger={setIsMessenger}
+          isUsers={isUsers}
+          setIsUsers={setIsUsers}
+          messageAlert={messageAlert}
+          setMessageAlert={setMessageAlert}
         />
+        <Container>
+          <h5>{name}</h5>
+          <StyledVideo muted ref={userVideo} autoPlay playsInline />
+          {peers.map((peer) => {
+            return <Video key={peer.peerID} peer={peer.peer} />;
+          })}
+        </Container>
+        {isMessenger && (
+          <div className="container">
+            <InfoBar room={room} setIsMessenger={setIsMessenger} />
+            <Messages messages={messages} name={name} />
+            <Input
+              message={message}
+              setMessage={setMessage}
+              sendMessage={sendMessage}
+            />
+          </div>
+        )}
+        {isUsers && (
+          <RoomInfo setIsUsers={setIsUsers} users={users} />
+
+          // <TextContainer users={users} />
+        )}
       </div>
-      <TextContainer users={users} />
-    </div>
+    </>
   );
 };
 
