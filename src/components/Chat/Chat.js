@@ -3,7 +3,6 @@ import queryString from 'query-string';
 import io from 'socket.io-client';
 import Peer from 'simple-peer';
 
-import './Chat.css';
 import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
 import Messages from '../Messages/Messages';
@@ -12,6 +11,8 @@ import ChatPageHeader from '../ChatPageHeader/ChatPageHeader';
 import RoomInfo from '../RoomInfo/RoomInfo';
 import MyVideo from '../MyVideo/MyVideo';
 import OtherVideo from '../OtherVideo/OtherVideo';
+
+import './Chat.scss';
 
 const Chat = ({ location }) => {
   const [name, setName] = useState('');
@@ -115,7 +116,6 @@ const Chat = ({ location }) => {
     });
 
     peer.on('signal', (signal) => {
-      console.log('signal', name);
       socketRef.current.emit('sendSignal', {
         userToSignal,
         callerID,
@@ -145,7 +145,7 @@ const Chat = ({ location }) => {
   return (
     <>
       <Header />
-      <div className="outerContainer">
+      <div className="outer-container">
         <ChatPageHeader
           isMessenger={isMessenger}
           setIsMessenger={setIsMessenger}
@@ -155,14 +155,12 @@ const Chat = ({ location }) => {
           setMessageAlert={setMessageAlert}
         />
 
-        {/* <Container> */}
-        <div>
+        <div className="video-container">
           <MyVideo videoRef={userVideo} />
           {peers.map((peer) => {
             return <OtherVideo key={peer.peerID} peer={peer.peer} />;
           })}
         </div>
-        {/* </Container> */}
         {isMessenger && (
           <div className="container">
             <InfoBar room={room} setIsMessenger={setIsMessenger} />

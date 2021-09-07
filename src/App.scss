@@ -1,15 +1,7 @@
-.green {
-  background: #00796b !important;
-  color: #fff !important;
-  font-weight: 500 !important;
-  &:hover {
-    background: #00685c !important;
-  }
+.close {
+  cursor: pointer;
 }
 
-.gray {
-  background: #00796b !important;
-  color: #fff !important;
-  font-weight: 500 !important;
-  background: #ccc !important;
+body {
+  background-color: #1a1a1d;
 }

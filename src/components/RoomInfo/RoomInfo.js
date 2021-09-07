@@ -9,32 +9,36 @@ const RoomInfo = ({ setIsUsers, users }) => {
   return (
     <div className="roomInfo-container">
       <div className="roomInfo">
-        <div className="leftInnerContainer">
-          <h3>Online:</h3>
+        <div className="left-inner-container">
+          <h3>Active Users</h3>
         </div>
         <div
-          className="rightInnerContainer"
+          className="right-inner-container"
           onClick={() => {
             setIsUsers(false);
           }}
         >
-          <img src={closeIcon} alt="close" />
+          <img className="close" src={closeIcon} alt="close" />
         </div>
       </div>
       {users ? (
-        // <div>
-        // <div className="activeContainer">
-        <h2>
-          {users.map(({ name }) => (
-            <div key={name}>
-              {name}
-              <img alt="Online Icon" src={onlineIcon} />
-            </div>
-          ))}
-        </h2>
-      ) : // </div>
-      // </div>
-      null}
+        <div>
+          <div className="active-container">
+            <h2>
+              {users.map(({ name }) => (
+                <div key={name} className="active-item">
+                  {name}
+                  <img
+                    className="online-icon"
+                    alt="Online Icon"
+                    src={onlineIcon}
+                  />
+                </div>
+              ))}
+            </h2>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

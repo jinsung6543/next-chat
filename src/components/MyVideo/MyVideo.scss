@@ -2,3 +2,18 @@
   width: 640px;
   height: 480px;
 }
+
+.position-absolute {
+  position: absolute;
+}
+
+.display-flex {
+  display: flex;
+}
+
+@media (min-width: 480px) and (max-width: 1470px) {
+  .my-video {
+    width: 400px;
+    height: 300px;
+  }
+}

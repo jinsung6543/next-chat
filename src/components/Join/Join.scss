@@ -13,20 +13,20 @@ body {
   box-sizing: border-box;
 }
 
-.joinOuterContainer {
+.join-outer-container {
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 100vh;
+  height: calc(100vh - 50px);
   align-items: center;
   background-color: #1a1a1d;
 }
 
-.joinInnerContainer {
+.join-inner-container {
   width: 20%;
 }
 
-.joinInput {
+.join-input {
   border-radius: 0;
   padding: 15px 20px;
   width: 100%;
@@ -49,6 +49,7 @@ body {
   display: inline-block;
   border: none;
   width: 100%;
+  cursor: pointer;
 }
 
 .mt-20 {
@@ -56,11 +57,11 @@ body {
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
-  .joinOuterContainer {
+  .join-outer-container {
     height: 100%;
   }
 
-  .joinInnerContainer {
+  .join-inner-container {
     width: 90%;
   }
 }

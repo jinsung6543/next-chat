@@ -3,12 +3,16 @@
   height: 50px;
   display: flex;
   padding: 20px;
+  background-color: #1a1a1d;
   .logo {
     display: flex;
     align-items: center;
     width: 100px;
     img {
       width: 100%;
+    }
+    &:hover {
+      cursor: pointer;
     }
   }
 }

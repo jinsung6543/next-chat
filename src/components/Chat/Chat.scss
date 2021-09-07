@@ -1,4 +1,4 @@
-.outerContainer {
+.outer-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,8 @@
 .video-container {
   padding: 20px;
   display: flex;
-  height: 100vh;
+  justify-content: center;
+  /* height: 100vh; */
   width: 90%;
   margin: auto;
   flex-wrap: wrap;
@@ -36,8 +37,14 @@ h5 {
   color: #fff;
 }
 
+@media (max-width: 935px) {
+  .outer-container {
+    height: 100vh;
+  }
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
-  .outerContainer {
+  .outer-container {
     height: 100%;
   }
 

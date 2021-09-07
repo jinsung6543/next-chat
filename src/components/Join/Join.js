@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 
-import './Join.css';
+import './Join.scss';
 
 const Join = () => {
   const [name, setName] = useState('');
@@ -11,13 +11,13 @@ const Join = () => {
   return (
     <>
       <Header />
-      <div className="joinOuterContainer">
-        <div className="joinInnerContainer">
+      <div className="join-outer-container">
+        <div className="join-inner-container">
           <h1 className="heading">Join</h1>
           <div>
             <input
               placeholder="Name"
-              className="joinInput"
+              className="join-input"
               type="text"
               onChange={(e) => setName(e.target.value)}
             />
@@ -25,7 +25,7 @@ const Join = () => {
           <div>
             <input
               placeholder="Room"
-              className="joinInput mt-20"
+              className="join-input mt-20"
               type="text"
               onChange={(e) => setRoom(e.target.value)}
             />
