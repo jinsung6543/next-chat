@@ -27,7 +27,7 @@ const Chat = ({ location }) => {
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
-  const ENDPOINT = 'http://localhost:5000';
+  const ENDPOINT = 'https://next-chat-jin.herokuapp.com/';
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
