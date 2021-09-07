@@ -7,7 +7,6 @@
   top: 0;
   right: 0;
   background: #fff;
-  border-radius: 0 0 0 10px;
   overflow: hidden;
   .header-items {
     display: flex;
@@ -47,5 +46,11 @@
         background: #eee;
       }
     }
+  }
+}
+
+@media (max-width: 480px) {
+  .frame-header {
+    width: 100%;
   }
 }

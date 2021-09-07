@@ -65,3 +65,9 @@
 .close:hover {
   cursor: pointer;
 }
+
+@media (max-width: 480px) {
+  .roomInfo-container {
+    width: 100%;
+  }
+}

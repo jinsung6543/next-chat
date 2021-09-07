@@ -11,9 +11,16 @@
   display: flex;
 }
 
-@media (min-width: 480px) and (max-width: 1470px) {
+@media (min-width: 1000px) and (max-width: 1470px) {
   .other-video {
     width: 400px;
     height: 300px;
+  }
+}
+
+@media (max-width: 999px) {
+  .other-video {
+    width: auto;
+    max-height: calc(90vh - 50px);
   }
 }

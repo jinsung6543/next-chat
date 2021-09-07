@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   background-color: #1a1a1d;
+  overflow: scroll;
   height: calc(100vh - 50px);
 }
 
@@ -38,24 +39,36 @@ h5 {
 }
 
 @media (max-width: 935px) {
-  .outer-container {
-    height: 100vh;
-  }
+  // .outer-container {
+  //   height: 100vh;
+  // }
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
-  .outer-container {
-    height: 100%;
+  // .outer-container {
+  //   height: 100%;
+  // }
+}
+
+@media (min-width: 480px) and (max-width: 1200px) {
+  .container {
+    width: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   .container {
     width: 100%;
     height: 100%;
   }
-}
 
-@media (min-width: 480px) and (max-width: 1200px) {
-  .container {
-    width: 60%;
+  .outer-container {
+    flex-direction: column;
   }
 }
